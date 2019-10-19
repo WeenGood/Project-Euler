@@ -449,6 +449,7 @@ def quest14(start = 1000000):
 
 #15.Начиная в левом верхнем углу сетки 2×2 и имея возможность двигаться только вниз или вправо, существует ровно 6 маршрутов до правого нижнего угла сетки. Сколько существует таких маршрутов в сетке 20×20?
 
+
 #16. 2**15 = 32768, сумма цифр этого числа равна 3 + 2 + 7 + 6 + 8 = 26. Какова сумма цифр числа 2**1000?
 #считает сумму цифр num
 def quest16(num):
@@ -465,8 +466,50 @@ def quest16(num):
 Примечание: Не считайте пробелы и дефисы. Например, число 342 (three hundred and forty-two) состоит из 23 букв, число 115 (one hundred and fifteen) - из 20 букв. Использование "and" при записи чисел соответствует правилам британского английского.
 '''
 
+
+
 def quest17():
-    pass#list words = ["one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen", "fifteen","sixteen","seventeen", "eighteen","nineteen"]
+    words1 = ["","one","two","three","four","five","six","seven","eight","nine"]
+    words11 = ["eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+    words2 = ["","ten","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"]
+    words3 = ["hundred","thousand"]
+
+    i = 1
+    text = ""
+
+    while i<10:
+        text += words1[i] + " "
+        i+=1
+    text += words2[1] + " "
+    i+= 1
+    while i<20:
+        text+= words11[i-11]+ " "
+        i+=1
+        
+    while i!=100:   
+        text += words2[(i//10)] + " " + words1[i%10] + " "
+        i+=1
+
+    while i!=1000:
+        text += words1[i//100] + " " + words3[0] + " "
+        if i%100 != 0:
+            if (i-(i//100)*100)//10 == 1:
+                if i%10 == 0:
+                    text += "and " + words2[1] + " "
+                else:
+                    text += "and " + words11[i%10-1] + " "
+            else:
+                text+= "and " + words2[(i-(i//100)*100)//10] + " " + words1[i%10] + " "
+        i+=1
+    text += "one " + words3[1]
+    res = len(text)
+    print(text)
+    text = text.replace(" ","")
+    res = len(text)
+    print(res)
+
+
+#quest17()
 
 #18.
 '''
@@ -521,21 +564,36 @@ def quest18():
     data = data.split(' ')
     newData = []
     [newData.append(x) for x in data if x.isdigit()]
-    i = 1
     data = []
-    while i<=len(newData):
-        data.append(list(newData[:i]))
-        newData = newData[i:]
-        #[newData.remove(x) for x in newData if x in newData[:i]]
-        #newData.remove(newData[:i])
-        i+=1
-    print(data)    
+    [data.append(int(x)) for x in newData]
+    i = 0
+    j = 1
+    k = 2
+    mas = data
+    triangle = []
+    while j<=len(mas):
+        triangle.append(mas[i:j])
+        i= j
+        j += k
+        k+=1
+    result = []
+    i = 0
+    j = 1
+    k = 0
+    #while k < len(triangle):
+        #while i <= len(triangle[k]):
+            #for x in triangle[k+1]:
+                #result.append()
+                
+
+
+    print(triangle)
 
 
 quest18()
 
 
-print("")
+
 
 #19.
 '''
